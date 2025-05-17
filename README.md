@@ -1,0 +1,2 @@
+# FrostByte
+FrostByte NixOS dotfiles
