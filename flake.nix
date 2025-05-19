@@ -22,18 +22,13 @@
       };
     };
     #NVF-NixOS Module
-    nvfConfigurations = {
-      inherit lib;
-      inherit pkgs;
-      inherit system;
-      packages.${system} = {
-        default = (
-          inputs.nvf.lib.neovimConfiguration {
-            modules = [ ./home/modules/nvf-configuration.nix ];
-          }
-          ).neovim;
-      };
-    };
+    packages."x86_64-linux".default = (
+      nvf.lib.neovimConfiguration {
+        inherit pkgs;
+        modules = [ 
+          ./home/modules/nvf-configuration.nix
+        ];
+      }).neovim;
     homeConfigurations = {
       rahul = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
