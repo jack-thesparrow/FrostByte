@@ -5,9 +5,9 @@
     nixpkgs.url = "nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    nixvim.url = "github:mikaelfangel/nixvim-config";
+    nixvim.url = "github:elythh/nixvim";
   };
-  outputs = { self, nixpkgs, home-manager, ...} @ inputs:
+  outputs = { self, nixpkgs, home-manager, nixvim, ...} @ inputs:
   let
     lib = nixpkgs.lib;
     system = "x86_64-linux";
@@ -25,12 +25,13 @@
     homeConfigurations = {
       rahul = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
+        #inherit system;
         extraSpecialArgs = {
           inputs = inputs;
         };
         modules = [ 
           ./home/home.nix
-          inputs.nixvim.nixosModules.default
+          #inputs.nixvim.packages.${pkgs.system}.default
         ];
       };
     };
