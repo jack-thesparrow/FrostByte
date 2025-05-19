@@ -16,8 +16,8 @@
       enableTreesitter = true;
 
       nix.enable = true;
-      c.enable = true;
-      java.enable = true;
+      clang.enable = true;
+      ts.enable = true;
     };
   };
 }
