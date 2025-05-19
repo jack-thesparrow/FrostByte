@@ -13,22 +13,23 @@
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
   in {
+    #NVF-NixOS Module
+    packages."x86_64-linux".default = (
+      nvf.lib.neovimConfiguration {
+        pkgs = nixpkgs.legacyPackages."x86_64-linux";
+        modules = [ 
+          ./home/modules/nvf-configuration.nix
+        ];
+      }).neovim;
     nixosConfigurations = {
       FrostByte = lib.nixosSystem {
         inherit system;
         modules = [ 
           ./system/configuration.nix
+          nvf.nixosModules.default
         ];
       };
     };
-    #NVF-NixOS Module
-    packages."x86_64-linux".default = (
-      nvf.lib.neovimConfiguration {
-        inherit pkgs;
-        modules = [ 
-          ./home/modules/nvf-configuration.nix
-        ];
-      }).neovim;
     homeConfigurations = {
       rahul = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
