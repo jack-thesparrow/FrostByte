@@ -76,9 +76,11 @@
       "inputs": {
         "flake-utils": [
           "nvf",
+          "nvf",
           "flake-utils"
         ],
         "nixpkgs": [
+          "nvf",
           "nvf",
           "nixpkgs"
         ],
@@ -130,6 +132,21 @@
     },
     "nixpkgs_2": {
       "locked": {
+        "lastModified": 1747542820,
+        "narHash": "sha256-GaOZntlJ6gPPbbkTLjbd8BMWaDYafhuuYRNrxCGnPJw=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "292fa7d4f6519c074f0a50394dbbe69859bb6043",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "ref": "nixos-unstable",
+        "type": "indirect"
+      }
+    },
+    "nixpkgs_3": {
+      "locked": {
         "lastModified": 1746152631,
         "narHash": "sha256-zBuvmL6+CUsk2J8GINpyy8Hs1Zp4PP6iBWSmZ4SCQ/s=",
         "owner": "nixos",
@@ -146,11 +163,26 @@
     },
     "nvf": {
       "inputs": {
+        "nixpkgs": "nixpkgs_2",
+        "nvf": "nvf_2"
+      },
+      "locked": {
+        "path": "./standalone/nvf",
+        "type": "path"
+      },
+      "original": {
+        "path": "./standalone/nvf",
+        "type": "path"
+      },
+      "parent": []
+    },
+    "nvf_2": {
+      "inputs": {
         "flake-parts": "flake-parts",
         "flake-utils": "flake-utils",
         "mnw": "mnw",
         "nil": "nil",
-        "nixpkgs": "nixpkgs_2",
+        "nixpkgs": "nixpkgs_3",
         "systems": "systems_2"
       },
       "locked": {
@@ -177,6 +209,7 @@
     "rust-overlay": {
       "inputs": {
         "nixpkgs": [
+          "nvf",
           "nvf",
           "nil",
           "nixpkgs"

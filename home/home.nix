@@ -1,5 +1,7 @@
-{ config, pkgs, ... }:
-
+{ config, pkgs, lib,... }@args:
+let
+  inputs = args.inputs;
+in
 {
   imports = [
     ./modules

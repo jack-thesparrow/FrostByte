@@ -29,6 +29,7 @@
     homeConfigurations = {
       rahul = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
+        extraSpecialArgs = { inputs = inputs; };
         modules = [ ./home/home.nix ];
       };
     };
