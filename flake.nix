@@ -5,22 +5,18 @@
     nixpkgs.url = "nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    nvf.url = "github:notashelf/nvf";
+    nvf.url = "path:./standalone/nvf";
   };
   outputs = { self, nixpkgs, home-manager, nvf, ...} @ inputs:
   let
     lib = nixpkgs.lib;
     system = "x86_64-linux";
-    pkgs = nixpkgs.legacyPackages.${system};
+    #pkgs = nixpkgs.legacyPackages.${system};
+    pkgs = import nixpkgs { inherit system; };
   in {
     #NVF-NixOS Module
-    packages."x86_64-linux".default = (
-      nvf.lib.neovimConfiguration {
-        pkgs = nixpkgs.legacyPackages."x86_64-linux";
-        modules = [ 
-          ./home/modules/nvf-configuration.nix
-        ];
-      }).neovim;
+    packages.${system}.default = nvf.packages.${system}.default;
+
     nixosConfigurations = {
       FrostByte = lib.nixosSystem {
         inherit system;
