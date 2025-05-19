@@ -7,7 +7,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nvf.url = "github:notashelf/nvf";
   };
-  outputs = { self, nixpkgs, home-manager, nvf, ...}:
+  outputs = { self, nixpkgs, home-manager, nvf, ...} @ inputs:
   let
     lib = nixpkgs.lib;
     system = "x86_64-linux";
@@ -20,12 +20,19 @@
           ./system/configuration.nix
         ];
       };
-      #NVF-NixOS Module
-      packages.system.default = (
-        nvf.lib.neovimConfiguration {
-          inherit pkgs;
-          modules = [ ./home/modules/nvf-configuration.nix ];
-        }).neovim;
+    };
+    #NVF-NixOS Module
+    nvfConfigurations = {
+      inherit lib;
+      inherit pkgs;
+      inherit system;
+      packages.${system} = {
+        default = (
+          inputs.nvf.lib.neovimConfiguration {
+            modules = [ ./home/modules/nvf-configuration.nix ];
+          }
+          ).neovim;
+      };
     };
     homeConfigurations = {
       rahul = home-manager.lib.homeManagerConfiguration {
