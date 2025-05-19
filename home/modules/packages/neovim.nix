@@ -1,8 +1,9 @@
-{ config, pkgs, inputs, nvf,... }:
+{ config, pkgs, lib, inputs, ... }@args :
+let
+  inputs = args.inputs;
+in
 {
-  home.packages = [
-    inputs.nvf.packages.${pkgs.system}.default
-  ];
+  programs.nixvim.enable = true;
 }
   
 
