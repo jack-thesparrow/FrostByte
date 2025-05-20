@@ -3,10 +3,16 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
-    home-manager.url = "github:nix-community/home-manager/master";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager = {
+      url = "github:nix-community/home-manager/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nixvim.url = "github:elythh/nixvim";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs =
     {
@@ -15,13 +21,16 @@
       home-manager,
       nixvim,
       chaotic,
+      nur,
       ...
     }@inputs:
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
-      #pkgs = nixpkgs.legacyPackages.${system};
-      pkgs = import nixpkgs { inherit system; };
+      pkgs = import nixpkgs {
+        inherit system;
+        overlays = [ nur.overlays.default ];
+      };
     in
     {
       nixosConfigurations = {
@@ -37,9 +46,8 @@
         rahul = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           #inherit system;
-          extraSpecialArgs = {
-            inputs = inputs;
-          };
+          extraSpecialArgs = { inherit inputs; };
+
           modules = [
             ./home/home.nix
             #inputs.nixvim.packages.${pkgs.system}.default
