@@ -7,6 +7,7 @@
     sl
     fastfetch
     htop
+    hollywood
     unzip
     hwinfo
     tree
