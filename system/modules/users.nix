@@ -11,6 +11,10 @@
     packages = with pkgs; [ ];
   };
   environment.shells = with pkgs; [ fish ];
+  environment.variables = {
+    EDITOR = "nvim";
+    VISUAL = "nvim";
+  };
   users.defaultUserShell = pkgs.fish;
   programs.fish.enable = true;
 }

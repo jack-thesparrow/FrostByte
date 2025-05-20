@@ -8,7 +8,12 @@ let
   };
 in
 {
-  programs.fish = {
-    shellAliases = aliases;
+  programs = {
+    fish = {
+      shellAliases = aliases;
+    };
+    bash = {
+      shellAliases = aliases;
+    };
   };
 }
