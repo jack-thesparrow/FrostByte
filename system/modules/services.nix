@@ -1,12 +1,16 @@
 { pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
+    aria2
+    fzf
     killall
     ntfs3g
     pciutils
   ];
 
   services = {
+    # Bluetooth
+    blueman.enable = true;
     # Enable CUPS for printing
     printing.enable = true;
 
@@ -29,5 +33,7 @@
     #      openFirewall = true;
     #    };
   };
+  #hardware.pulseaudio.enable = true;
+  hardware.bluetooth.enable = true;
   security.rtkit.enable = true;
 }
