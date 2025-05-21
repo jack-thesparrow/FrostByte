@@ -8,5 +8,5 @@
     ./services.nix
   ];
   selectedKernel = "cachy";
-  xe.driver.enable = true;
+  xe.driver.enable = false;
 }

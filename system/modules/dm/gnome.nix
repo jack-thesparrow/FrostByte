@@ -5,6 +5,7 @@
   ...
 }:
 {
+  environment.systemPackages = with pkgs; [ ];
   services = {
     xserver = {
       displayManager.gdm = {
