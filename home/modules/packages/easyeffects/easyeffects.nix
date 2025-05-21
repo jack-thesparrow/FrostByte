@@ -12,22 +12,28 @@ in
   xdg.configFile."easyeffects/irs".source = irsSourceDir;
 
   # Start EasyEffects in background on login
-systemd.user.services.easyeffects = {
-  Unit = {
-    Description = "EasyEffects background service";
-    After = [ "graphical-session.target" "pipewire.service" "pipewire-pulse.service" ];
-    Requires = [ "pipewire.service" ];
-  };
+  systemd.user.services.easyeffects = {
+    Unit = {
+      Description = "EasyEffects background service";
+      After = [
+        "graphical-session.target"
+        "pipewire.service"
+        "pipewire-pulse.service"
+      ];
+      Requires = [ "pipewire.service" ];
+    };
 
-  Service = {
-    ExecStartPre = "${pkgs.coreutils}/bin/sleep 3"; # delay to ensure pipewire is ready
-    ExecStart = "${pkgs.easyeffects}/bin/easyeffects --gapplication-service";
-    Restart = "on-failure";
-  };
+    Service = {
+      Type = "dbus";
+      BusName = "com.github.wwmm.easyeffects";
+      ExecStart = "${pkgs.easyeffects}/bin/easyeffects --gapplication-service";
+      Restart = "on-failure";
+      KillMode = "mixed";
+      ExitOnSession = true;
+    };
 
-  Install = {
-    WantedBy = [ "default.target" ];
+    Install = {
+      WantedBy = [ "default.target" ];
+    };
   };
-};
-
 }
