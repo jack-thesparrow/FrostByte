@@ -2,10 +2,13 @@
 {
   environment.systemPackages = with pkgs; [
     aria2
+    file
     fzf
     killall
     ntfs3g
     pciutils
+    vulkan-tools
+    vulkan-validation-layers
   ];
 
   services = {

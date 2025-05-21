@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
+    flake-utils.url = "github:numtide/flake-utils";
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -13,6 +14,8 @@
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # Windows Software Emulation Flake
+    #win-emu.url = "path:./home/modules/win-emu";
   };
   outputs =
     {
@@ -45,13 +48,14 @@
       homeConfigurations = {
         rahul = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          #inherit system;
-          extraSpecialArgs = { inherit inputs; };
-
           modules = [
             ./home/home.nix
-            #inputs.nixvim.packages.${pkgs.system}.default
+            #win-emu.homeManagerModules.win-emu
           ];
+          extraSpecialArgs = {
+            inherit inputs;
+            #inherit win-emu;
+          };
         };
       };
     };

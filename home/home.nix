@@ -16,6 +16,8 @@ in
 
   home.stateVersion = "24.11"; # Please read the comment before changing.
 
+  # Toggle Windows Emulation
+  #win-emulation.enable = false;
   home.packages = [ ];
 
   home.file = { };

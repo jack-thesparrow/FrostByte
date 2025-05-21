@@ -16,6 +16,20 @@
     boot.kernelParams = [ "xe.force_probe=*" ];
     services.xserver.enable = false;
     services.xserver.videoDrivers = [ "xe" ];
+    hardware.opengl = {
+      enable = true;
+      #driSupport = true;
+      driSupport32Bit = true;
+      extraPackages = with pkgs; [
+        vulkan-loader
+        vulkan-tools
+        mesa
+      ];
+      extraPackages32 = with pkgs; [
+        driversi686Linux.intel-media-driver
+        driversi686Linux.mesa
+      ];
+    };
     hardware.graphics.enable = true;
     hardware.graphics.enable32Bit = true;
     hardware.graphics.extraPackages = with pkgs; [
@@ -28,4 +42,3 @@
     environment.variables.WLR_NO_HARDWARE_CURSORS = "1";
   };
 }
-
