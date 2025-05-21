@@ -12,6 +12,8 @@
         wayland = true;
       };
 
+      videoDrivers = [ "xe" ];
+
       desktopManager.gnome = {
         enable = true;
         extraGSettingsOverrides = '''';
