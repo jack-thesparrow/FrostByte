@@ -5,6 +5,7 @@ let
     "cls" = "clear";
     "dots" = "cd && cd .dotfiles";
     "dost" = "dots";
+    "vim" = "nvim";
   };
 in
 {

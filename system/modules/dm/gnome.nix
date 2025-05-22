@@ -34,5 +34,37 @@
       XCURSOR_THEME = "Babita-Original-Classic";
       XCURSOR_SIZE = "24";
     };
+    gnome.excludePackages = with pkgs; [
+      atomix
+      baobab
+      cheese
+      decibels
+      epiphany
+      evince
+      geary
+      gedit
+      gnome-calendar
+      gnome-characters
+      gnome-clocks
+      gnome-contacts
+      gnome-disk-utility
+      gnome-font-viewer
+      gnome-logs
+      gnome-maps
+      gnome-music
+      gnome-photos
+      gnome-shell-extensions
+      gnome-system-monitor
+      gnome-terminal
+      gnome-tour
+      gnome-weather
+      hitori
+      iagno
+      simple-scan
+      snapshot
+      tali
+      yelp
+    ];
   };
+
 }

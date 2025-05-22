@@ -3,6 +3,7 @@
   environment.systemPackages = with pkgs; [
     aria2
     file
+    dconf
     fzf
     killall
     ntfs3g
@@ -16,6 +17,9 @@
     blueman.enable = true;
     # Enable CUPS for printing
     printing.enable = true;
+
+    #Enable dconf services
+    dbus.enable = true;
 
     # Enable sound with pipewire
     pulseaudio.enable = false;
