@@ -6,7 +6,6 @@
 }:
 
 let
-  # List of GNOME extensions to install and link
   gnomeExts = with pkgs.gnomeExtensions; [
     blur-my-shell
     dash-to-dock
@@ -20,7 +19,6 @@ in
 
   programs.gnome-shell.enable = true;
 
-  # GTK + icon theme
   gtk = {
     enable = true;
     theme = {
@@ -33,27 +31,26 @@ in
     };
   };
 
-  # Install themes, tweaks, and GNOME extensions
   home.packages =
     with pkgs;
     [
+      xdotool
       orchis-theme
       tela-icon-theme
       gnome-tweaks
     ]
     ++ gnomeExts;
 
-  # Symlink GNOME extensions to ~/.local so GNOME shell can see them
-  home.activation.linkGnomeExtensions = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    mkdir -p ~/.local/share/gnome-shell/extensions
-    ${builtins.concatStringsSep "\n" (
-      map (ext: ''
-        if [ -d "${ext}/share/gnome-shell/extensions" ]; then
-          for d in ${ext}/share/gnome-shell/extensions/*; do
-            ln -sf "$d" "$HOME/.local/share/gnome-shell/extensions/$(basename $d)"
-          done
-        fi
-      '') gnomeExts
-    )}
-  '';
+  # Declarative installation of extensions
+  xdg.dataFile."gnome-shell/extensions/blur-my-shell@aunetx" = {
+    source = "${pkgs.gnomeExtensions.blur-my-shell}/share/gnome-shell/extensions/blur-my-shell@aunetx";
+  };
+
+  xdg.dataFile."gnome-shell/extensions/dash-to-dock@micxgx.gmail.com" = {
+    source = "${pkgs.gnomeExtensions.dash-to-dock}/share/gnome-shell/extensions/dash-to-dock@micxgx.gmail.com";
+  };
+
+  xdg.dataFile."gnome-shell/extensions/user-theme@gnome-shell-extensions.gcampax.github.com" = {
+    source = "${pkgs.gnomeExtensions.user-themes}/share/gnome-shell/extensions/user-theme@gnome-shell-extensions.gcampax.github.com";
+  };
 }

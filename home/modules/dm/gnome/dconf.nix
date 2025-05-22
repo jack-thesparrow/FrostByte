@@ -53,5 +53,44 @@
     "org/gnome/shell/extensions/user-theme" = {
       name = "Orchis";
     };
+
+    "org/gnome/desktop/wm/preferences" = {
+      focus-mode = "sloppy";
+    };
+
+    "org/gnome/desktop/wm/keybindings" = {
+      close = [
+        "<Super>q"
+        "<Alt>F4"
+      ];
+    };
+
+    # Register your custom keybinding paths here — critical!
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings" = {
+      custom-keybindings = [
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/"
+      ];
+    };
+
+    # Custom keybindings definitions
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
+      name = "Open Ghostty";
+      command = "ghostty";
+      binding = "<Super>t";
+    };
+
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
+      name = "Open Firefox";
+      command = "firefox";
+      binding = "<Super>f";
+    };
+
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2" = {
+      name = "Open Nautilus";
+      command = "nautilus";
+      binding = "<Super>e";
+    };
   };
 }
