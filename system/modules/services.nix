@@ -4,6 +4,7 @@
     aria2
     file
     dconf
+    evtest
     fzf
     killall
     ntfs3g
@@ -11,6 +12,8 @@
     vulkan-tools
     vulkan-validation-layers
   ];
+  # This prevents the generating man-cache while nixos-rebuild switch
+  documentation.man.generateCaches = false;
 
   services = {
     # Bluetooth
