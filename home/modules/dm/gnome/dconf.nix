@@ -92,5 +92,8 @@
       command = "nautilus";
       binding = "<Super>e";
     };
+    "org/gnome/desktop/input-sources" = {
+      xkb-options = [ "caps:swapescape" ];
+    };
   };
 }
