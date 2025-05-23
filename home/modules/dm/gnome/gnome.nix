@@ -53,4 +53,6 @@ in
   xdg.dataFile."gnome-shell/extensions/user-theme@gnome-shell-extensions.gcampax.github.com" = {
     source = "${pkgs.gnomeExtensions.user-themes}/share/gnome-shell/extensions/user-theme@gnome-shell-extensions.gcampax.github.com";
   };
+
+  home.file.".themes/Orchis-Custom/gnome-shell/gnome-shell.css".source = ./gnome-shell.css;
 }

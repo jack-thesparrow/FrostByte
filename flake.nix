@@ -8,12 +8,15 @@
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # Preconfig nixvim
     nixvim.url = "github:elythh/nixvim";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     nur = {
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # Zen Browser Flake
+    zen-browser.url = "github:conneroisu/zen-browser-flake";
     # Windows Software Emulation Flake
     #win-emu.url = "path:./home/modules/win-emu";
   };
@@ -54,6 +57,7 @@
           ];
           extraSpecialArgs = {
             inherit inputs;
+            inherit system;
             #inherit win-emu;
           };
         };

@@ -18,5 +18,6 @@
     ./ventoy.nix
     ./vscode.nix
     ./wpsoffice.nix
+    ./zen-browser.nix
   ];
 }
