@@ -6,7 +6,7 @@
     ./firefox.nix
     ./git.nix
     ./ghostty.nix
-    ./libreoffice.nix
+    #./libreoffice.nix
     ./neovim.nix
     ./okular.nix
     ./pavucontrol.nix
