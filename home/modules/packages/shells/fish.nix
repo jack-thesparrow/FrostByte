@@ -7,6 +7,11 @@
 
   programs.fish = {
     enable = true;
+
+    shellInit = ''
+      set -g fish_greeting "Welcome back $USER"
+    '';
+
     interactiveShellInit = ''
       # Environment tweaks
       set -gx EDITOR nvim
@@ -51,12 +56,16 @@
   home.activation.configure-tide = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     ${pkgs.fish}/bin/fish -c "
       tide configure --auto \
-        --style=Lean \
+        --style=Rainbow \
         --prompt_colors='True color' \
         --show_time=No \
-        --lean_prompt_height='Two lines' \
-        --prompt_connection=Solid \
-        --prompt_connection_andor_frame_color=Dark \
+        --rainbow_prompt_separators=Angled \
+        --powerline_prompt_heads=Round \
+        --powerline_prompt_tails=Round \
+        --powerline_prompt_style='Two lines, character and frame' \
+        --prompt_connection=Disconnected \
+        --powerline_right_prompt_frame=No \
+        --prompt_connection_andor_frame_color=Darkest \
         --prompt_spacing=Sparse \
         --icons='Many icons' \
         --transient=Yes

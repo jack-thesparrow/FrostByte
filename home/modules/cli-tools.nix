@@ -2,6 +2,7 @@
 {
   home.packages = with pkgs; [
     asciiquarium
+    bat
     disfetch
     lolcat
     cowsay
