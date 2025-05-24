@@ -9,8 +9,11 @@
     killall
     ntfs3g
     pciutils
+    ripgrep
+    syncthing
     vulkan-tools
     vulkan-validation-layers
+    xdg-utils
   ];
   # This prevents the generating man-cache while nixos-rebuild switch
   documentation.man.generateCaches = false;
@@ -36,6 +39,14 @@
     };
     # Enable OpenSSH Daemon
     openssh.enable = true;
+
+    # Enable syncing
+    syncthing = {
+      enable = true;
+      user = "rahul";
+      dataDir = "/home/rahul/Documents/";
+      configDir = "/home/rahul/.config/syncthing";
+    };
 
     # Firewall
     #    jelllyfin = {

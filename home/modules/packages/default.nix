@@ -3,11 +3,12 @@
   imports = [
     ./android-tools.nix
     ./easyeffects
-    ./firefox.nix
+    #./firefox.nix
     ./git.nix
     ./ghostty.nix
     #./libreoffice.nix
     ./neovim.nix
+    ./obsidian
     ./okular.nix
     ./pavucontrol.nix
     ./qbittorrent.nix
