@@ -6,6 +6,7 @@
     #./firefox.nix
     ./git.nix
     ./ghostty.nix
+    ./gparted.nix
     #./libreoffice.nix
     ./neovim.nix
     ./obsidian

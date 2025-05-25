@@ -38,6 +38,8 @@ in
       orchis-theme
       tela-icon-theme
       gnome-tweaks
+      polkit_gnome
+      lxsession
     ]
     ++ gnomeExts;
 
@@ -67,4 +69,5 @@ in
       };
     };
   };
+  #programs.gnome-polkit.enable = true;
 }
