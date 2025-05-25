@@ -48,6 +48,8 @@
       configDir = "/home/rahul/.config/syncthing";
     };
 
+    # Virt manager
+
     # Firewall
     #    jelllyfin = {
     #      enable = true;

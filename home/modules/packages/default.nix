@@ -16,6 +16,7 @@
     ./shells
     ./spotify.nix
     ./vlc.nix
+    ./virtmanager.nix
     ./ventoy.nix
     ./vscode.nix
     ./wpsoffice.nix

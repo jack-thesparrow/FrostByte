@@ -8,6 +8,8 @@
       "networkmanager"
       "wheel"
       "video"
+      "libvirtd"
+      "adbusers"
     ];
     packages = with pkgs; [ ];
   };
