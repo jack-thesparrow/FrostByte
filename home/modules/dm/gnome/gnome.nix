@@ -55,4 +55,16 @@ in
   };
 
   home.file.".themes/Orchis-Custom/gnome-shell/gnome-shell.css".source = ./gnome-shell.css;
+
+  xdg.portal = {
+    enable = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk
+    ];
+    config = {
+      common = {
+        default = "gtk";
+      };
+    };
+  };
 }
