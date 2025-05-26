@@ -48,6 +48,14 @@
       configDir = "/home/rahul/.config/syncthing";
     };
 
+    # Swap escape and capslock
+    xserver = {
+      xkb = {
+        layout = "us";
+        options = "caps:swapescape";
+      };
+    };
+
     # Virt manager
 
     # Firewall
