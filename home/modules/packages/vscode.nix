@@ -25,7 +25,6 @@
           "editor.formatOnSave" = true;
         };
 
-
         "files.autoSave" = "onFocusChange";
         "python.pythonPath" = "${pkgs.python3}/bin/python3";
         "rust-analyzer.server.path" = "${pkgs.rust-analyzer}/bin/rust-analyzer";
