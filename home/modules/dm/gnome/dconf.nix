@@ -1,4 +1,9 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  variables,
+  ...
+}:
 
 {
   dconf.settings = {
@@ -81,19 +86,19 @@
     # Custom keybindings definitions
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
       name = "Open Ghostty";
-      command = "ghostty";
+      command = "${variables.terminal}";
       binding = "<Super>t";
     };
 
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
       name = "Open Browser";
-      command = "zen";
+      command = "${variables.browser}";
       binding = "<Super>f";
     };
 
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2" = {
-      name = "Open Nautilus";
-      command = "nautilus";
+      name = "Open File Explorer";
+      command = "${variables.file}";
       binding = "<Super>e";
     };
     "org/gnome/desktop/input-sources" = {

@@ -6,6 +6,7 @@
   # Program Options
   browser = "zen";
   terminal = "ghostty";
+  file = "naulilus";
   keyboardLayout = "us";
   consoleKeyMap = "us";
 }

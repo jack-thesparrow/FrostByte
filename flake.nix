@@ -37,6 +37,7 @@
         inherit system;
         overlays = [ nur.overlays.default ];
       };
+      variables = import ./system/variables.nix;
     in
     {
       nixosConfigurations = {
@@ -46,6 +47,9 @@
             ./system/configuration.nix
             chaotic.nixosModules.default
           ];
+          specialArgs = {
+            inherit inputs variables;
+          };
         };
       };
       homeConfigurations = {
@@ -58,7 +62,7 @@
           extraSpecialArgs = {
             inherit inputs;
             inherit system;
-            #inherit win-emu;
+            inherit variables;
           };
         };
       };
