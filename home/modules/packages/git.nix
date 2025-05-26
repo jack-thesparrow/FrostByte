@@ -1,9 +1,14 @@
-{config, pkgs, ...}:
+{
+  config,
+  pkgs,
+  variables,
+  ...
+}:
 {
   programs.git = {
     enable = true;
-    userName = "jack-thesparrow";
-    userEmail = "dummymail@github.com";
+    userName = "${variables.gitUsername}";
+    userEmail = "${variables.gitEmail}";
     extraConfig = {
       init.defaultBranch = "main";
     };
