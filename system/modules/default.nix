@@ -1,7 +1,20 @@
 { pkgs, ... }:
+let
+  environment = "twm";
+  dm = import ./dm;
+  twm = import ./wm;
+
+  selectedEnvironment =
+    if environment == "twm" then
+      twm
+    else if environment == "dm" then
+      dm
+    else
+      { };
+in
 {
   imports = [
-    ./dm
+    selectedEnvironment
     ./users.nix
     ./kernel.nix
     ./gpu.nix

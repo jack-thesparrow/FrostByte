@@ -1,7 +1,8 @@
 { pkgs, ... }:
 {
   imports = [
-    ./dm
+    #./dm
+    ./wm
     ./packages
     ./cli-tools.nix
   ];

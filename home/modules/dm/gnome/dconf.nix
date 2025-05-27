@@ -1,16 +1,23 @@
 {
   config,
   pkgs,
+  lib,
   variables,
   wallpapers,
   ...
 }:
+
 {
+  #  home.activation.resetCustomKeybindings = lib.hm.dag.entryBefore [ "dconfSettings" ] ''
+  #    ${pkgs.glib}/bin/gsettings reset org.gnome.settings-daemon.plugins.media-keys custom-keybindings || true
+  #  '';
+  #
   home.file."Pictures/default.jpg".source = "${wallpapers}/nix-default.jpg";
 
   dconf.settings = {
     "org/gnome/desktop/background" = {
       picture-uri = "file://${config.home.homeDirectory}/Pictures/default.jpg";
+      picture-uri-dark = "file://${config.home.homeDirectory}/Pictures/default.jpg";
     };
 
     "org/gnome/desktop/interface" = {
@@ -27,7 +34,6 @@
     };
 
     "org/gnome/shell/extensions/blur-my-shell" = {
-      #panel-blur = true;
       overview-blur = true;
       dash-blur = true;
       blur-amount = 30;
@@ -35,19 +41,6 @@
       sigma = 30;
       noise-opacity = 0.1;
       customize-panel = true;
-      #panel-opacity = 0.0;
-      #panel-brightness = 0.7;
-      #panel-blur-override = true;
-
-      #      panel-css = ''
-      #        background-color: rgba(0, 0, 0, 0);  /* Enables transparency */
-      #        font-weight: bold;
-      #        height: 2.3em;
-      #        margin: 5px 22px 0 22px;
-      #        border-radius: 10px;
-      #        overflow: visible;
-      #        box-shadow: 0 0 10px rgba(0,0,0,0.2);
-      #      '';
     };
 
     "org/gnome/shell/extensions/dash-to-dock" = {
@@ -74,23 +67,21 @@
     };
 
     "org/gnome/desktop/wm/keybindings" = {
-      close = [
-        "<Super>q"
-        "<Alt>F4"
-      ];
+      close = [ "<Alt>F4" ];
     };
 
-    # Register your custom keybinding paths here — critical!
+    # Custom keybindings registration — NO trailing slashes here
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings" = {
       custom-keybindings = [
-        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
-        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
-        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/"
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom-terminal"
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1"
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2"
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3"
       ];
     };
 
-    # Custom keybindings definitions
-    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
+    # Custom keybindings definitions — keys without trailing slashes
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom-terminal" = {
       name = "Open Ghostty";
       command = "${variables.terminal}";
       binding = "<Super>t";
@@ -107,6 +98,13 @@
       command = "${variables.file}";
       binding = "<Super>e";
     };
+
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3" = {
+      name = "Close Window";
+      command = "xdotool getactivewindow windowclose";
+      binding = "<Super>q";
+    };
+
     "org/gnome/desktop/input-sources" = {
       xkb-options = [ "caps:swapescape" ];
     };
