@@ -38,6 +38,7 @@
         overlays = [ nur.overlays.default ];
       };
       variables = import ./system/variables.nix;
+      wallpapers = ./system/assets/walls;
     in
     {
       nixosConfigurations = {
@@ -63,6 +64,7 @@
             inherit inputs;
             inherit system;
             inherit variables;
+            inherit wallpapers;
           };
         };
       };

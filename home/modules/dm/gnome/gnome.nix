@@ -29,6 +29,10 @@ in
       name = "Tela";
       package = pkgs.tela-icon-theme;
     };
+    cursorTheme = {
+      name = "Adwaita";
+      package = pkgs.adwaita-icon-theme;
+    };
   };
 
   home.packages =

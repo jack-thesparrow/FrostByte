@@ -2,11 +2,17 @@
   config,
   pkgs,
   variables,
+  wallpapers,
   ...
 }:
-
 {
+  home.file."Pictures/default.jpg".source = "${wallpapers}/nix-default.jpg";
+
   dconf.settings = {
+    "org/gnome/desktop/background" = {
+      picture-uri = "file://${config.home.homeDirectory}/Pictures/default.jpg";
+    };
+
     "org/gnome/desktop/interface" = {
       gtk-theme = "Orchis";
       icon-theme = "Tela";
