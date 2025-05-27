@@ -5,6 +5,8 @@
     isNormalUser = true;
     description = "Rahul Tudu";
     extraGroups = [
+      "audio"
+      "input"
       "networkmanager"
       "wheel"
       "video"

@@ -26,6 +26,32 @@
       # rofi launcher
       "bind = $mainMod, A, exec, rofi -show drun -show-icons"
 
+      # Volume/Brightness control
+      # Increase volume by 5%
+      ",XF86AudioRaiseVolume,exec,wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
+
+      # Decrease volume by 5%
+      ",XF86AudioLowerVolume,exec,wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+
+      # Toggle mute on default audio sink
+      ",XF86AudioMute,exec,wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+
+      # Toggle media play/pause
+      ",XF86AudioPlay,exec,playerctl play-pause"
+      ",XF86AudioPause,exec,playerctl play-pause"
+
+      # Play next media track
+      ",XF86AudioNext,exec,playerctl next"
+
+      # Play previous media track
+      ",XF86AudioPrev,exec,playerctl previous"
+
+      # Decrease screen brightness by 5%
+      ",XF86MonBrightnessDown,exec,brightnessctl set 5%-"
+
+      # Increase screen brightness by 5%
+      ",XF86MonBrightnessUp,exec,brightnessctl set +5%"
+
       # Window/Session actions
       "$mainMod, Delete, exit" # kill hyprland session
       "$mainMod, Q, killactive" # kill acitve window

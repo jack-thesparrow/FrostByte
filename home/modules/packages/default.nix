@@ -9,6 +9,7 @@
     ./gparted.nix
     #./libreoffice.nix
     ./neovim.nix
+    ./nautilus.nix
     ./obsidian
     ./okular.nix
     ./pavucontrol.nix
