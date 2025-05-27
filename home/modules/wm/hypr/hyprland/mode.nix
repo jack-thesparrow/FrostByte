@@ -6,11 +6,11 @@
   home.sessionVariables = {
     QT_QPA_PLATFORMTHEME = "qt5ct";
   };
-  gtk = {
-    enable = true;
-    theme = {
-      name = "Adwaita-dark";
-      package = pkgs.gnome-themes-extra;
-    };
-  };
+  #  gtk = {
+  #    enable = true;
+  #    theme = {
+  #      name = "Adwaita-dark";
+  #      package = pkgs.gnome-themes-extra;
+  #    };
+  #  };
 }

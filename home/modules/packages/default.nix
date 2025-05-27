@@ -17,6 +17,7 @@
     ./ranger.nix
     ./shells
     ./spotify.nix
+    ./stylix.nix
     ./vlc.nix
     ./virtmanager.nix
     ./ventoy.nix

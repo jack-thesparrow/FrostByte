@@ -15,6 +15,11 @@
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # Stylix
+    stylix = {
+      url = "github:danth/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # Zen Browser Flake
     zen-browser.url = "github:conneroisu/zen-browser-flake";
     # Windows Software Emulation Flake
@@ -28,6 +33,7 @@
       nixvim,
       chaotic,
       nur,
+      stylix,
       ...
     }@inputs:
     let
@@ -47,6 +53,7 @@
           modules = [
             ./system/configuration.nix
             chaotic.nixosModules.default
+            stylix.nixosModules.stylix
           ];
           specialArgs = {
             inherit inputs variables;
@@ -58,6 +65,7 @@
           inherit pkgs;
           modules = [
             ./home/home.nix
+            stylix.homeModules.stylix
             #win-emu.homeManagerModules.win-emu
           ];
           extraSpecialArgs = {

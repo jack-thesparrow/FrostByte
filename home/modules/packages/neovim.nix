@@ -1,4 +1,11 @@
-{ config, pkgs, lib, nixvim, system,  ... }@args:
+{
+  config,
+  pkgs,
+  lib,
+  nixvim,
+  system,
+  ...
+}@args:
 let
   inputs = args.inputs;
 in
@@ -7,5 +14,3 @@ in
     inputs.nixvim.packages.${pkgs.system}.default
   ];
 }
-  
-

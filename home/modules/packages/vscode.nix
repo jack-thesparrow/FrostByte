@@ -18,7 +18,7 @@
 
       userSettings = {
         "editor.tabSize" = 2;
-        "editor.fontSize" = 14;
+        #"editor.fontSize" = 14;
         "editor.defaultFormatter" = "bbenoist.nix";
         "[nix]" = {
           "editor.defaultFormatter" = "bbenoist.nix";

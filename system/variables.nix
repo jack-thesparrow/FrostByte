@@ -9,4 +9,5 @@
   file = "nautilus";
   keyboardLayout = "us";
   consoleKeyMap = "us";
+  stylixImage = ./assets/walls/nix-default.jpg;
 }
