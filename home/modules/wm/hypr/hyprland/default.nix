@@ -6,6 +6,8 @@
     ./hyprland.nix
     ./inputs.nix
     ./monitors.nix
+    ./mode.nix
     ./misc.nix
+    ./xdg.nix
   ];
 }

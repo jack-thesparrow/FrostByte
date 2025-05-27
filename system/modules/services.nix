@@ -8,6 +8,7 @@
     fzf
     killall
     ntfs3g
+    networkmanagerapplet
     pciutils
     ripgrep
     syncthing

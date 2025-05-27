@@ -44,6 +44,9 @@
           preserve_split = true;
         };
       };
+      #      extraConfig = ''
+      #        exec-once = ~/.dotfiles/home/modules/wm/hypr/scripts/start.sh
+      #      '';
     };
   };
 }

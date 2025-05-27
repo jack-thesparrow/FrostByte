@@ -23,6 +23,9 @@
       "$mainMod, F, exec, ${variables.browser}"
       "$mainMod, E, exec, ${variables.file}"
 
+      # rofi launcher
+      "bind = $mainMod, A, exec, rofi -show drun -show-icons"
+
       # Window/Session actions
       "$mainMod, Delete, exit" # kill hyprland session
       "$mainMod, Q, killactive" # kill acitve window
