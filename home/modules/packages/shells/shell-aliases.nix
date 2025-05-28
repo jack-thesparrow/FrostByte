@@ -6,6 +6,7 @@ let
     "hcat" = "highlight -O ansi --force";
     "dots" = "cd && cd .dotfiles";
     "dost" = "dots";
+    "ref" = "cd && cd references";
     "vim" = "nvim";
   };
 in

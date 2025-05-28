@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{ pkgs, ... }: {
   environment.systemPackages = with pkgs; [
     aria2
     file
@@ -19,6 +18,7 @@
   # This prevents the generating man-cache while nixos-rebuild switch
   documentation.man.generateCaches = false;
 
+  imports = [ ./tlp.nix ];
   services = {
     # Bluetooth
     blueman.enable = true;

@@ -1,5 +1,7 @@
 { pkgs, config, ... }:
-{
+let
+  scripts = import ../scripts/scripts.nix {inherit pkgs; };
+in{
   programs.waybar.settings = [
     {
       layer = "top";
@@ -22,6 +24,7 @@
       ];
       # modules-center = ["clock" "custom/notification"];
       modules-center = [
+        "hyprland/window"
         "idle_inhibitor"
         "clock"
       ];
@@ -137,7 +140,8 @@
       };
       "hyprland/language" = {
         format = "{short}"; # can use {short} and {variant}
-        on-click = "${../scripts/keyboardswitch.sh}";
+        #on-click = "${../scripts/keyboardswitch.sh}";
+        on-click = "${scripts.keyboardswitch}";
       };
       "hyprland/workspaces" = {
         disable-scroll = true;
@@ -161,7 +165,7 @@
       };
 
       "hyprland/window" = {
-        format = "  {}";
+        format = "  {}";
         separate-outputs = true;
         rewrite = {
           "harvey@hyprland =(.*)" = "$1 ";

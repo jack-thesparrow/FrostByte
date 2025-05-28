@@ -17,7 +17,7 @@
     ./qbittorrent.nix
     ./ranger.nix
     ./shells
-    ./spotify.nix
+    #./spotify.nix
     ./stylix.nix
     ./slurp.nix
     ./telegram.nix
@@ -27,6 +27,7 @@
     ./vscode.nix
     ./wpsoffice.nix
     ./slurp.nix
+    ./spicetify.nix
     ./zen-browser.nix
   ];
 }

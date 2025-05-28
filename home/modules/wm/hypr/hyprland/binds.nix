@@ -4,7 +4,11 @@
   variables,
   ...
 }:
+let 
+  scripts = import ../../scripts/scripts.nix {inherit pkgs; };
+in 
 {
+  
   wayland.windowManager.hyprland.settings = {
     gestures = {
       workspace_swipe = 1;
@@ -25,7 +29,8 @@
       "$mainMod, C, exec, ${variables.ide}"
 
       # rofi launcher
-      "bind = $mainMod, A, exec, rofi -show drun -show-icons"
+      #"$mainMod, A, exec, pkill -x rofi || ${../../scripts/rofi.sh} drun" # launch desktop applications
+      "$mainMod, A, exec, pkill -x rofi || ${scripts.rofi} drun" # launch desktop applications
 
       # Volume/Brightness control
       # Increase volume by 5%
