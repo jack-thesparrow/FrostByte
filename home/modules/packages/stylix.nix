@@ -6,7 +6,12 @@
     base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
     image = variables.stylixImage; # Fixed line
     polarity = "dark";
-    opacity.terminal = 2.0;
+    opacity = {
+      applications = 0.8;
+      desktop = 0.0;
+      terminal = 0.75;
+      popups = 0.75;
+    };
     cursor = {
       package = pkgs.bibata-cursors;
       name = "Bibata-Modern-Ice";
@@ -36,6 +41,14 @@
       gtk.enable = true;
       nixos-icons.enable = true;
       ghostty.enable = false;
+
+      waybar = {
+        enable = true;
+        addCss = true;
+        enableLeftBackColors = false;
+        enableCenterBackColors = false;
+        enableRightBackColors = false;
+      };
     };
   };
 }

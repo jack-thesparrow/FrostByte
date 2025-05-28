@@ -7,6 +7,7 @@
     ./git.nix
     ./ghostty.nix
     ./gparted.nix
+    ./grim.nix
     #./libreoffice.nix
     ./neovim.nix
     ./nautilus.nix
@@ -18,11 +19,14 @@
     ./shells
     ./spotify.nix
     ./stylix.nix
+    ./slurp.nix
+    ./telegram.nix
     ./vlc.nix
     ./virtmanager.nix
     ./ventoy.nix
     ./vscode.nix
     ./wpsoffice.nix
+    ./slurp.nix
     ./zen-browser.nix
   ];
 }

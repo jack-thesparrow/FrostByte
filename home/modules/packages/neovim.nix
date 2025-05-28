@@ -1,4 +1,5 @@
 {
+
   config,
   pkgs,
   lib,
@@ -8,6 +9,7 @@
 }@args:
 let
   inputs = args.inputs;
+
 in
 {
   home.packages = [

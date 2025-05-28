@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   programs.waybar.style = ''
@@ -63,7 +68,7 @@
 
     window#waybar {
       background-color: transparent;
-      color: @lavender;
+      /*color: @lavender;*/
     }
 
     /* Workspaces */
