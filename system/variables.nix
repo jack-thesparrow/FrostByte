@@ -7,7 +7,8 @@
   browser = "zen";
   terminal = "ghostty";
   file = "nautilus";
+  ide = "code";
   keyboardLayout = "us";
   consoleKeyMap = "us";
-  stylixImage = ./assets/walls/nix-default.jpg;
+  stylixImage = ./assets/walls/a_road_with_trees_and_a_mountain_in_the_background.png;
 }

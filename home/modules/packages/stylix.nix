@@ -3,7 +3,7 @@
   # Styling Options
   stylix = {
     enable = true;
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/everforest-dark-hard.yaml";
     image = variables.stylixImage; # Fixed line
     polarity = "dark";
     opacity = {
@@ -39,15 +39,17 @@
     };
     targets = {
       gtk.enable = true;
+      qt.enable = true;
       nixos-icons.enable = true;
-      ghostty.enable = false;
+      ghostty.enable = true;
 
+      fish.enable = true;
       waybar = {
         enable = true;
         addCss = true;
-        enableLeftBackColors = false;
-        enableCenterBackColors = false;
-        enableRightBackColors = false;
+        #        enableLeftBackColors = false;
+        #        enableCenterBackColors = false;
+        #        enableRightBackColors = false;
       };
     };
   };

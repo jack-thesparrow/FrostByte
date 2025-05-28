@@ -22,6 +22,7 @@
       "$mainMod, T, exec, ${variables.terminal}"
       "$mainMod, F, exec, ${variables.browser}"
       "$mainMod, E, exec, ${variables.file}"
+      "$mainMod, C, exec, ${variables.ide}"
 
       # rofi launcher
       "bind = $mainMod, A, exec, rofi -show drun -show-icons"

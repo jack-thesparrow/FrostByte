@@ -1,127 +1,242 @@
+{ pkgs, config, ... }:
 {
-  config,
-  lib,
-  pkgs,
-  ...
-}:
-
-{
-  programs.waybar.settings = {
-    mainBar = {
+  programs.waybar.settings = [
+    {
       layer = "top";
       position = "top";
+      mode = "dock"; # Fixes fullscreen issues
+      height = 32; # 35
+      exclusive = true;
+      passthrough = false;
+      gtk-layer-shell = true;
+      ipc = true;
+      fixed-center = true;
+      margin-top = 10;
+      margin-left = 10;
+      margin-right = 10;
+      margin-bottom = 0;
+
       modules-left = [
-        "clock"
         "hyprland/workspaces"
-        # "custom/weather"
-        # "wlr/taskbar"
-        "mpris"
+        "cava"
+      ];
+      # modules-center = ["clock" "custom/notification"];
+      modules-center = [
+        "idle_inhibitor"
+        "clock"
       ];
       modules-right = [
-        # "cpu"
-        # "memory"
-        # "temperature"
-        # "custom/gpu-temp"
-        # "custom/gpu-util"
-        "tray"
-        "network"
+        "custom/gpuinfo"
+        "cpu"
+        "memory"
+        "backlight"
         "pulseaudio"
         "bluetooth"
+        "network"
+        "tray"
         "battery"
-        "backlight"
       ];
 
+      "custom/notification" = {
+        tooltip = false;
+        format = "{icon}";
+        format-icons = {
+          notification = "<span foreground='red'><sup></sup></span>";
+          none = "";
+          dnd-notification = "<span foreground='red'><sup></sup></span>";
+          dnd-none = "";
+          inhibited-notification = "<span foreground='red'><sup></sup></span>";
+          inhibited-none = "";
+          dnd-inhibited-notification = "<span foreground='red'><sup></sup></span>";
+          dnd-inhibited-none = "";
+        };
+        return-type = "json";
+        exec-if = "which swaync-client";
+        exec = "swaync-client -swb";
+        on-click = "swaync-client -t -sw";
+        on-click-right = "swaync-client -d -sw";
+        escape = true;
+      };
+
+      "custom/colour-temperature" = {
+        format = "{} ";
+        exec = "wl-gammarelay-rs watch {t}";
+        on-scroll-up = "busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateTemperature n +100";
+        on-scroll-down = "busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateTemperature n -100";
+      };
+      "custom/cava_mviz" = {
+        exec = "${../scripts/WaybarCava.sh}";
+        format = "{}";
+      };
+      "cava" = {
+        hide_on_silence = false;
+        framerate = 60;
+        bars = 10;
+        format-icons = [
+          "▁"
+          "▂"
+          "▃"
+          "▄"
+          "▅"
+          "▆"
+          "▇"
+          "█"
+        ];
+        input_delay = 1;
+        # "noise_reduction" = 0.77;
+        sleep_timer = 5;
+        bar_delimiter = 0;
+        on-click = "playerctl play-pause";
+      };
+      "custom/gpuinfo" = {
+        exec = "${../scripts/gpuinfo.sh}";
+        return-type = "json";
+        format = " {}";
+        interval = 5; # once every 5 seconds
+        tooltip = true;
+        max-length = 1000;
+      };
+      "custom/icon" = {
+        # format = " ";
+        exec = "echo ' '";
+        format = "{}";
+      };
+      "mpris" = {
+        format = "{player_icon} {title} - {artist}";
+        format-paused = "{status_icon} <i>{title} - {artist}</i>";
+        player-icons = {
+          default = "▶";
+          spotify = "";
+          mpv = "󰐹";
+          vlc = "󰕼";
+          firefox = "";
+          chromium = "";
+          kdeconnect = "";
+          mopidy = "";
+        };
+        status-icons = {
+          paused = "⏸";
+          playing = "";
+        };
+        ignored-players = [
+          "firefox"
+          "chromium"
+        ];
+        max-length = 30;
+      };
+      "temperature" = {
+        hwmon-path = "/sys/class/hwmon/hwmon1/temp1_input";
+        critical-threshold = 83;
+        format = "{icon} {temperatureC}°C";
+        format-icons = [
+          ""
+          ""
+          ""
+        ];
+        interval = 10;
+      };
+      "hyprland/language" = {
+        format = "{short}"; # can use {short} and {variant}
+        on-click = "${../scripts/keyboardswitch.sh}";
+      };
+      "hyprland/workspaces" = {
+        disable-scroll = true;
+        all-outputs = true;
+        active-only = false;
+        on-click = "activate";
+        persistent-workspaces = {
+          "*" = [
+            1
+            2
+            3
+            4
+            5
+            6
+            7
+            8
+            9
+            10
+          ];
+        };
+      };
+
       "hyprland/window" = {
-        format = "{title}";
-        max-length = 333;
+        format = "  {}";
         separate-outputs = true;
+        rewrite = {
+          "harvey@hyprland =(.*)" = "$1 ";
+          "(.*) — Mozilla Firefox" = "$1 󰈹";
+          "(.*)Mozilla Firefox" = " Firefox 󰈹";
+          "(.*) - Visual Studio Code" = "$1 󰨞";
+          "(.*)Visual Studio Code" = "Code 󰨞";
+          "(.*) — Dolphin" = "$1 󰉋";
+          "(.*)Spotify" = "Spotify 󰓇";
+          "(.*)Spotify Premium" = "Spotify 󰓇";
+          "(.*)Steam" = "Steam 󰓓";
+        };
+        max-length = 1000;
+      };
+
+      "idle_inhibitor" = {
+        format = "{icon}";
+        format-icons = {
+          activated = "󰥔";
+          deactivated = "";
+        };
       };
 
       "clock" = {
-        format = "<span>   </span><span>{:%I:%M %a %d}</span>";
-        tooltip-format = "{calendar}";
+        format = "{:%a %d %b %R}";
+        # format = "{:%R 󰃭 %d·%m·%y}";
+        format-alt = "{:%I:%M %p}";
+        tooltip-format = "<tt>{calendar}</tt>";
         calendar = {
           mode = "month";
-          "mode-mon-col" = 3;
-          "on-scroll" = 1;
-          "on-click-right" = "mode";
+          mode-mon-col = 3;
+          on-scroll = 1;
+          on-click-right = "mode";
           format = {
             months = "<span color='#ffead3'><b>{}</b></span>";
-            days = "<span color='#ecc6d9'><b>{}</b></span>";
-            weeks = "<span color='#99ffdd'><b>{%W}</b></span>";
             weekdays = "<span color='#ffcc66'><b>{}</b></span>";
             today = "<span color='#ff6699'><b>{}</b></span>";
           };
         };
         actions = {
-          on-click-middle = "mode";
-          on-click-right = "shift_up";
-          on-click = "shift_down";
+          on-click-right = "mode";
+          on-click-forward = "tz_up";
+          on-click-backward = "tz_down";
+          on-scroll-up = "shift_up";
+          on-scroll-down = "shift_down";
         };
-        format-alt = "<span>   </span><span>{:%H:%M}</span>";
       };
 
       "cpu" = {
-        format = "<span foreground='#b8bb26'>Cpu: </span> {usage}%";
-        on-click = "${config.home.homeDirectory}/.config/waybar/scripts/gpu-util";
+        interval = 10;
+        format = "󰍛 {usage}%";
+        format-alt = "{icon0}{icon1}{icon2}{icon3}";
+        format-icons = [
+          "▁"
+          "▂"
+          "▃"
+          "▄"
+          "▅"
+          "▆"
+          "▇"
+          "█"
+        ];
       };
 
       "memory" = {
-        format = "<span foreground='#d65d9e'>  </span> {}%";
-        interval = 1;
-      };
-
-      "custom/gpu-util" = {
-        exec = "${config.home.homeDirectory}/.config/waybar/scripts/gpu-util";
-        format = "<span foreground='#67b0e8'>󰢮  </span> {}";
-        interval = 1;
-      };
-
-      "custom/gpu-temp" = {
-        exec = "${config.home.homeDirectory}/.config/waybar/scripts/gpu-temp";
-        format = "<span foreground='#e57474'> </span> {}";
-        interval = 1;
-      };
-
-      "custom/weather" = {
-        exec = "${config.home.homeDirectory}/.config/waybar/scripts/get_weather.sh Gandhinagar";
-        return-type = "json";
-        format = "{}";
+        interval = 30;
+        format = "󰾆 {percentage}%";
+        format-alt = "󰾅 {used}GB";
+        max-length = 10;
         tooltip = true;
-        interval = 3600;
-      };
-
-      "temperature" = {
-        "hwmon-path" = "/sys/class/hwmon/hwmon1/temp1_input";
-        critical-threshold = 80;
-        format = "<span foreground='#83a598'> </span> {temperatureC}°C";
-        interval = 1;
-      };
-
-      "hyprland/workspaces" = {
-        format = "{icon}";
-        "active-only" = false;
-        "sort-by-number" = false;
-        "on-click" = "activate";
-        "all-outputs" = false;
-        format-icons = {
-          "1" = " 1";
-          "2" = " 2";
-          "3" = " 3";
-          "4" = " 4";
-          "5" = " 5";
-          "6" = " 6";
-          "7" = " 7";
-          "8" = " 8";
-          "9" = " 9";
-          "10" = " 10";
-        };
+        tooltip-format = " {used:.1f}GB/{total:.1f}GB";
       };
 
       "backlight" = {
-        device = "intel_backlight";
-        format = "<span foreground='#cc6666'>{icon}</span>   {percent}%";
-        "tooltip-format" = "{icon}   {percent}%";
+        format = "{icon} {percent}%";
         format-icons = [
           ""
           ""
@@ -133,6 +248,68 @@
           ""
           ""
         ];
+        on-scroll-up = "${pkgs.brightnessctl}/bin/brightnessctl set 2%+";
+        on-scroll-down = "${pkgs.brightnessctl}/bin/brightnessctl set 2%-";
+      };
+
+      "network" = {
+        # on-click = "nm-connection-editor";
+        # "interface" = "wlp2*"; # (Optional) To force the use of this interface
+        format-wifi = "󰤨 Wi-Fi";
+        # format-wifi = " {bandwidthDownBits}  {bandwidthUpBits}";
+        # format-wifi = "󰤨 {essid}";
+        format-ethernet = "󱘖 Wired";
+        # format-ethernet = " {bandwidthDownBits}  {bandwidthUpBits}";
+        format-linked = "󱘖 {ifname} (No IP)";
+        format-disconnected = "󰤮 Off";
+        # format-disconnected = "󰤮 Disconnected";
+        format-alt = "󰤨 {signalStrength}%";
+        tooltip-format = "󱘖 {ipaddr}  {bandwidthUpBytes}  {bandwidthDownBytes}";
+      };
+
+      "bluetooth" = {
+        format = "";
+        # format-disabled = ""; # an empty format will hide the module
+        format-connected = " {num_connections}";
+        tooltip-format = " {device_alias}";
+        tooltip-format-connected = "{device_enumerate}";
+        tooltip-format-enumerate-connected = " {device_alias}";
+        on-click = "blueman-manager";
+      };
+
+      "pulseaudio" = {
+        format = "{icon} {volume}";
+        format-muted = " ";
+        on-click = "pavucontrol -t 3";
+        tooltip-format = "{icon} {desc} // {volume}%";
+        scroll-step = 4;
+        format-icons = {
+          headphone = "";
+          hands-free = "";
+          headset = "";
+          phone = "";
+          portable = "";
+          car = "";
+          default = [
+            ""
+            ""
+            ""
+          ];
+        };
+      };
+
+      "pulseaudio#microphone" = {
+        format = "{format_source}";
+        format-source = " {volume}%";
+        format-source-muted = "";
+        on-click = "pavucontrol -t 4";
+        tooltip-format = "{format_source} {source_desc} // {source_volume}%";
+        scroll-step = 5;
+      };
+
+      "tray" = {
+        icon-size = 12;
+        spacing = 5;
       };
 
       "battery" = {
@@ -141,11 +318,13 @@
           warning = 30;
           critical = 20;
         };
-        format = "{icon}  {capacity}%";
-        "format-charging" = "<span color='#c3e88d'>󱐋</span>  {capacity}%";
-        "format-plugged" = "  {capacity}%";
-        "tooltip-format" = "{time} left";
+        format = "{icon} {capacity}%";
+        # format-charging = " {capacity}%";
+        format-charging = " {capacity}%";
+        format-plugged = " {capacity}%";
+        format-alt = "{time} {icon}";
         format-icons = [
+          "󰂎"
           "󰁺"
           "󰁻"
           "󰁼"
@@ -157,125 +336,14 @@
           "󰂂"
           "󰁹"
         ];
-        interval = 1;
       };
 
-      "network" = {
-        format = "󰤭 Off";
-        "format-wifi" = "{icon}  {essid}";
-        "format-ethernet" = "<span foreground='#b48ead'>󰈀   Ethernet</span>";
-        "format-disconnected" = "󰤭   Disconnected";
-        "tooltip-format" = "{ifname} via {gwaddr} ";
-        "tooltip-format-wifi" = "{icon}  {essid} ({signalStrength}%) ";
-        "format-icons" = [
-          "󰤯 "
-          "󰤟 "
-          "󰤢 "
-          "󰤥 "
-          "󰤨 "
-        ];
-        "tooltip-format-ethernet" = "󰈀  {ifname} ({signalStrength}%)";
-        "tooltip-format-disconnected" = "Disconnected";
-        "on-click" = "nm-applet";
-        "on-click-right" = "pkill nm-applet";
-        "max-length" = 50;
+      "custom/power" = {
+        format = "{}";
+        on-click = "wlogout -b 4";
+        interval = 86400; # once every day
+        tooltip = true;
       };
-
-      "pulseaudio" = {
-        format = "{icon}  {volume}%";
-        "format-bluetooth" = "    {volume}%";
-        "format-muted" = "<span foreground='#E67E80'>󰖁</span>  {volume}%";
-        "on-click" = "pavucontrol";
-        "on-click-right" = "pactl set-sink-mute @DEFAULT_SINK@ toggle";
-        "ignored-sinks" = [ "Easy Effects Sink" ];
-        "format-icons" = {
-          headphone = "  ";
-          "hands-free" = "  ";
-          headset = "󰋎 ";
-          phone = " ";
-          portable = " ";
-          car = " ";
-          default = [
-            "󰕿"
-            "󰖀"
-            "󰕾"
-          ];
-        };
-        "on-click-left" = "pavucontrol";
-      };
-
-      "mpris" = {
-        format = "{player_icon} {dynamic}";
-        "format-paused" = "{status_icon} <i>{dynamic}</i>";
-        "player-icons" = {
-          default = "<span foreground='#98BB6C'>󰎆  </span>";
-          mpv = "🎵";
-        };
-        "status-icons" = {
-          paused = "<span foreground='#E46876'> </span>";
-        };
-        "max-length" = 20;
-        interval = 1;
-      };
-
-      "tray" = {
-        format = "<span foreground='#D3C6AA'>{icon}</span>";
-        icon-size = 14;
-        spacing = 5;
-      };
-
-      "idle_inhibitor" = {
-        format = "{icon}";
-        format-icons = {
-          activated = "󱠛 ";
-          deactivated = "󱤱 ";
-        };
-      };
-
-      "wlr/taskbar" = {
-        format = "{name}";
-        "icon-size" = 14;
-        "icon-theme" = "Numix-Circle";
-        "tooltip-format" = "{title}";
-        "on-click" = "activate";
-        "on-click-middle" = "close";
-        "ignore-list" = [ "Alacritty" ];
-        "app_ids-mapping" = {
-          firefoxdeveloperedition = "firefox-developer-edition";
-        };
-        rewrite = {
-          "Firefox Web Browser" = "Firefox";
-          "Kitty" = "Terminal";
-        };
-      };
-
-      "bluetooth" = {
-        "on-click" = "${config.home.homeDirectory}/.config/waybar/scripts/bluetooth-control";
-        "on-click-right" = "${config.home.homeDirectory}/.config/hypr/scripts/rofi-bluetooth";
-        "on-click-middle" = "${config.home.homeDirectory}/.config/waybar/scripts/rofi-bluetooth";
-        format = "{icon}";
-        interval = 15;
-        "format-connected" = "󰂯 {num_connections}";
-        "format-connected-battery" = "{icon}  {device_alias}-{device_battery_percentage}%";
-        "format-icons" = {
-          on = "󰂯";
-          off = "<span foreground='#76946A'>󰂲</span>";
-          disabled = "󰂲";
-          connected = "󰂯";
-        };
-        "tooltip-format" = "{device_alias} {status}";
-        "format-device-preference" = [
-          "device1"
-          "device2"
-        ];
-        "tooltip-format-connected" =
-          "{controller_alias}\n{num_connections} connected\n\n{device_enumerate}";
-        "tooltip-format-enumerate-connected" = "{device_alias}";
-        "tooltip-format-enumerate-connected-battery" =
-          "{device_alias}\t{icon} {device_battery_percentage}%";
-        "max-length" = 18;
-      };
-    };
-  };
+    }
+  ];
 }
-

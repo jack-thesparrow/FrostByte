@@ -4,6 +4,7 @@
     asciiquarium
     bat
     disfetch
+    neofetch
     lolcat
     cowsay
     sl
