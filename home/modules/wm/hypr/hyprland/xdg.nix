@@ -4,8 +4,8 @@
 
   #exec-once = sh -c "sleep 1" && swww img /home/rahul/.dotfiles/system/assets/walls/nix-default.jpg
   #exec-once = swww init
+  #exec-once = dunst
   wayland.windowManager.hyprland.extraConfig = ''
     exec-once = nm-applet --indicator
-    exec-once = dunst
   '';
 }

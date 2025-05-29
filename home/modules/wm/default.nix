@@ -1,9 +1,10 @@
 { ... }: {
   imports = [
     ./hypr
-    ./dunst
+    #./dunst
     ./waybar
     ./rofi
+    ./swaync
     #./sddm
   ];
 }

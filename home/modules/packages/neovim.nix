@@ -1,17 +1,9 @@
 {
-
-  config,
   pkgs,
-  lib,
-  nixvim,
   system,
+  inputs,
   ...
-}@args:
-let
-  inputs = args.inputs;
-
-in
-{
+} @ args: {
   home.packages = [
     inputs.nixvim.packages.${pkgs.system}.default
   ];

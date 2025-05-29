@@ -1,5 +1,4 @@
-{ ... }:
-{
+{...}: {
   imports = [
     ./android-tools.nix
     ./easyeffects
@@ -8,6 +7,7 @@
     ./ghostty.nix
     ./gparted.nix
     ./grim.nix
+    ./gwenview.nix
     #./libreoffice.nix
     ./neovim.nix
     ./nautilus.nix

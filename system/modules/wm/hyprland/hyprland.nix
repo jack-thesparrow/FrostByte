@@ -9,7 +9,7 @@
     hyprland
     xwayland
     libinput
-    dunst
+    #dunst
     libnotify
     swww
     rofi-wayland
