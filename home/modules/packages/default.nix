@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   imports = [
     ./android-tools.nix
     ./easyeffects
@@ -8,7 +9,10 @@
     ./gparted.nix
     ./grim.nix
     ./gwenview.nix
+    ./gimp.nix
     #./libreoffice.nix
+    ./musescore.nix
+    ./marktext.nix
     ./neovim.nix
     ./nautilus.nix
     ./obsidian
@@ -21,6 +25,7 @@
     ./stylix.nix
     ./slurp.nix
     ./telegram.nix
+    ./term2alpha.nix
     ./vlc.nix
     ./virtmanager.nix
     ./ventoy.nix

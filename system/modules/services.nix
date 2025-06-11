@@ -1,19 +1,24 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   environment.systemPackages = with pkgs; [
     aria2
+    catimg
     file
     dconf
     evtest
     fzf
+    gzip
     killall
     ntfs3g
     networkmanagerapplet
     pciutils
     ripgrep
     syncthing
+    unzip
     vulkan-tools
     vulkan-validation-layers
     xdg-utils
+    zip
   ];
   # This prevents the generating man-cache while nixos-rebuild switch
   documentation.man.generateCaches = false;
@@ -49,6 +54,9 @@
       configDir = "/home/rahul/.config/syncthing";
     };
 
+    logind = {
+      powerKey = "suspend";
+    };
     # Swap escape and capslock
     xserver = {
       xkb = {

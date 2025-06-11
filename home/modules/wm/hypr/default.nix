@@ -1,8 +1,9 @@
-{...}: {
+{ ... }:
+{
   imports = [
     ./hyprland
     ./hyprcursor
     ./hypridle
-    #./hyprlock
+    ./hyprlock
   ];
 }

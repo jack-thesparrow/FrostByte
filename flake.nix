@@ -9,14 +9,22 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # Preconfig nixvim
-    nixvim = {
-      url = "github:elythh/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # nixvim = {
+    #   url = "github:elythh/nixvim";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
     #    nixvim = {
     #      url = "github:jack-thesparrow/nixvim";
     #      inputs.nixpkgs.follows = "nixpkgs";
     #    };
+    nvf = {
+      url = "github:jack-thesparrow/schrovimger";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    term2alpha = {
+      url = "git+https://git.sr.ht/~zethra/term2alpha";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     spicetify-nix = {
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -37,53 +45,58 @@
     # Windows Software Emulation Flake
     #win-emu.url = "path:./home/modules/win-emu";
   };
-  outputs = {
-    self,
-    nixpkgs,
-    home-manager,
-    nixvim,
-    chaotic,
-    nur,
-    stylix,
-    ...
-  } @ inputs: let
-    lib = nixpkgs.lib;
-    system = "x86_64-linux";
-    pkgs = import nixpkgs {
-      inherit system;
-      overlays = [nur.overlays.default];
-    };
-    variables = import ./system/variables.nix;
-    wallpapers = ./system/assets/walls;
-  in {
-    nixosConfigurations = {
-      FrostByte = lib.nixosSystem {
+  outputs =
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      #nixvim,
+      nvf,
+      chaotic,
+      term2alpha,
+      nur,
+      stylix,
+      ...
+    }@inputs:
+    let
+      lib = nixpkgs.lib;
+      system = "x86_64-linux";
+      pkgs = import nixpkgs {
         inherit system;
-        modules = [
-          ./system/configuration.nix
-          chaotic.nixosModules.default
-          stylix.nixosModules.stylix
-        ];
-        specialArgs = {
-          inherit inputs variables;
-        };
+        overlays = [ nur.overlays.default ];
       };
-    };
-    homeConfigurations = {
-      rahul = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = [
-          ./home/home.nix
-          stylix.homeModules.stylix
-          #win-emu.homeManagerModules.win-emu
-        ];
-        extraSpecialArgs = {
-          inherit inputs;
+      variables = import ./system/variables.nix;
+      wallpapers = ./system/assets/walls;
+    in
+    {
+      nixosConfigurations = {
+        FrostByte = lib.nixosSystem {
           inherit system;
-          inherit variables;
-          inherit wallpapers;
+          modules = [
+            ./system/configuration.nix
+            chaotic.nixosModules.default
+            stylix.nixosModules.stylix
+          ];
+          specialArgs = {
+            inherit inputs variables;
+          };
+        };
+      };
+      homeConfigurations = {
+        rahul = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = [
+            ./home/home.nix
+            stylix.homeModules.stylix
+            #win-emu.homeManagerModules.win-emu
+          ];
+          extraSpecialArgs = {
+            inherit inputs;
+            inherit system;
+            inherit variables;
+            inherit wallpapers;
+          };
         };
       };
     };
-  };
 }

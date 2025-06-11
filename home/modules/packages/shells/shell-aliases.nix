@@ -8,6 +8,7 @@ let
     "dost" = "dots";
     "ref" = "cd && cd references";
     "vim" = "nvim";
+    "pj" = "cd && cd .projects";
   };
 in
 {

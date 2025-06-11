@@ -3,8 +3,10 @@
   system,
   inputs,
   ...
-} @ args: {
+}@args:
+{
   home.packages = [
-    inputs.nixvim.packages.${pkgs.system}.default
+    inputs.nvf.packages.${pkgs.system}.default
+    #inputs.nixvim.packages.${pkgs.system}.default
   ];
 }

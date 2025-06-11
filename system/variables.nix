@@ -10,5 +10,5 @@
   ide = "code";
   keyboardLayout = "us";
   consoleKeyMap = "us";
-  stylixImage = ./assets/walls/a_road_with_trees_and_a_mountain_in_the_background.png;
+  stylixImage = ./assets/walls/a_foggy_forest_with_trees.png;
 }

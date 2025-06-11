@@ -4,11 +4,11 @@
   variables,
   ...
 }:
-let 
-  scripts = import ../../scripts/scripts.nix {inherit pkgs; };
-in 
+let
+  scripts = import ../../scripts/scripts.nix { inherit pkgs; };
+in
 {
-  
+
   wayland.windowManager.hyprland.settings = {
     gestures = {
       workspace_swipe = 1;
@@ -147,6 +147,8 @@ in
       "$mainMod, mouse:272, movewindow"
       "$mainMod, mouse:273, resizewidow"
       "$mainMod, Z, movewindow"
+      ",mouse:275, resizewindow"
+      ",mouse:276, movewindow"
       "$mainMod, X, resizewindow"
     ];
   };
