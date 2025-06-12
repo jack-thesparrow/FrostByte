@@ -140,6 +140,9 @@ in
 
       # Toggle focused window split
       "bind = $mainMod, J, togglesplit"
+
+      # Swap window position
+      "bind = $mainMod, K, swapwindow, master"
     ];
 
     # Keybinds for mouse

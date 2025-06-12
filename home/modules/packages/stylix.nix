@@ -42,6 +42,7 @@
       qt.enable = true;
       nixos-icons.enable = true;
       ghostty.enable = true;
+      tmux.enable = true;
       nvf = {
         enable = true;
       };

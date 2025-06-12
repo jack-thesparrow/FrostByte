@@ -8,6 +8,7 @@
     evtest
     fzf
     gzip
+    glow
     killall
     ntfs3g
     networkmanagerapplet

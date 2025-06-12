@@ -4,6 +4,7 @@
     ./android-tools.nix
     ./easyeffects
     #./firefox.nix
+    ./fonts.nix
     ./git.nix
     ./ghostty.nix
     ./gparted.nix
@@ -33,6 +34,7 @@
     ./wpsoffice.nix
     ./slurp.nix
     ./spicetify.nix
+    ./tmux.nix
     ./zen-browser.nix
   ];
 }
