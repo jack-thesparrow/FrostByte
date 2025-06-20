@@ -3,16 +3,28 @@
   environment.systemPackages = with pkgs; [
     aria2
     catimg
+    cachix
+    chafa
+    devenv
+    epub-thumbnailer
+    fd
+    ffmpegthumbnailer
     file
     dconf
     evtest
     fzf
     gzip
+    git
+    gh
     glow
+    imagemagick
     killall
     ntfs3g
     networkmanagerapplet
     pciutils
+    pre-commit
+    poppler-utils
+    nerd-fonts.jetbrains-mono
     ripgrep
     syncthing
     unzip
@@ -77,4 +89,6 @@
   #hardware.pulseaudio.enable = true;
   hardware.bluetooth.enable = true;
   security.rtkit.enable = true;
+  networking.firewall.checkReversePath = false;
+
 }

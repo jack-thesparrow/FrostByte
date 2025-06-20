@@ -1,6 +1,20 @@
 {
   description = "FrostByte Config";
 
+  # Binary Servers
+  nixConfig = {
+    extra-substituters = [
+      "https://nix-community.cachix.org"
+      "https://chaotic-nyx.cachix.org/"
+      "https://schrovimger.cachix.org/"
+    ];
+    extra-trusted-public-keys = [
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      "chaotic-nyx.cachix.org-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
+      "schrovimger.cachix.org-1:wUDg44FWjTBa3CutgbINFRAEb8N5P2yTWze45jcGvMY="
+    ];
+  };
+
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";

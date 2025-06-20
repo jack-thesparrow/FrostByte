@@ -15,6 +15,7 @@
     ./musescore.nix
     ./marktext.nix
     ./neovim.nix
+    ./nix-direnv.nix
     ./nautilus.nix
     ./obsidian
     ./okular.nix
@@ -25,6 +26,7 @@
     #./spotify.nix
     ./stylix.nix
     ./slurp.nix
+    ./ssh.nix
     ./telegram.nix
     ./term2alpha.nix
     ./vlc.nix
