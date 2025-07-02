@@ -20,15 +20,15 @@
     fonts = {
       monospace = {
         package = pkgs.nerd-fonts.jetbrains-mono;
-        name = "JetBrains Mono";
+        name = "JetBrainsMono Nerd Font Mono";
       };
       sansSerif = {
-        package = pkgs.montserrat;
-        name = "Montserrat";
+        package = pkgs.nerd-fonts.jetbrains-mono;
+        name = "JetBrainsMono Nerd Font Mono";
       };
       serif = {
-        package = pkgs.montserrat;
-        name = "Montserrat";
+        package = pkgs.nerd-fonts.jetbrains-mono;
+        name = "JetBrainsMono Nerd Font Mono";
       };
       sizes = {
         applications = 12;
@@ -43,6 +43,7 @@
       nixos-icons.enable = true;
       ghostty.enable = true;
       tmux.enable = true;
+      kitty.enable = true;
       nvf = {
         enable = true;
       };

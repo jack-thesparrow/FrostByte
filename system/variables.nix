@@ -5,9 +5,9 @@
 
   # Program Options
   browser = "zen";
-  terminal = "ghostty";
+  terminal = "kitty";
   file = "nautilus";
-  ide = "code";
+  ide = "nvim";
   keyboardLayout = "us";
   consoleKeyMap = "us";
   stylixImage = ./assets/walls/a_foggy_forest_with_trees.png;

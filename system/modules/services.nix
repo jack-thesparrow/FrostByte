@@ -17,6 +17,7 @@
     git
     gh
     glow
+    lazygit
     imagemagick
     killall
     ntfs3g

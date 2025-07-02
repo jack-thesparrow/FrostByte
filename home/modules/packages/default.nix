@@ -4,14 +4,16 @@
     ./android-tools.nix
     ./easyeffects
     #./firefox.nix
+    ./file-roller.nix
     ./fonts.nix
-    ./git.nix
+    #./git.nix
     ./ghostty.nix
     ./gparted.nix
     ./grim.nix
     ./gwenview.nix
     ./gimp.nix
     #./libreoffice.nix
+    ./kitty.nix
     ./musescore.nix
     ./marktext.nix
     ./neovim.nix
@@ -34,9 +36,11 @@
     ./ventoy.nix
     ./vscode.nix
     ./wpsoffice.nix
+    ./wezterm.nix
     ./slurp.nix
     ./spicetify.nix
     ./tmux.nix
+    ./zed.nix
     ./zen-browser.nix
   ];
 }
